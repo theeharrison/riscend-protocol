@@ -1,0 +1,13 @@
+[package]
+name = "RiscendProtocol"
+version = "1.0.0"
+upgrade_policy = "compatible"
+edition = "2024"
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "testnet"
+subdir = "aptos-framework"
+
+[addresses]
+riscend_addr = "0x72a9c1bce2b923a81abc72404b5f4e523997445615ef584b47bb57eeebc46a5f"

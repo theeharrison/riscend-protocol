@@ -1,0 +1,31 @@
+{
+  "name": "riscend-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@aptos-labs/wallet-adapter-ant-design": "^5.3.19",
+    "@aptos-labs/wallet-adapter-react": "^8.3.3",
+    "next": "16.2.2",
+    "petra-plugin-wallet-adapter": "^0.4.5",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.5.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5"
+  }
+}

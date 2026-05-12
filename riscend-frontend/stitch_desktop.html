@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RISCEND | Sovereign Vault Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary": "#33005b",
+            "surface": "#070d1f",
+            "on-background": "#dfe4fe",
+            "primary-dim": "#15a4ff",
+            "on-primary-fixed-variant": "#002e4d",
+            "outline": "#6f758b",
+            "surface-variant": "#1c253e",
+            "error-container": "#9f0519",
+            "secondary-container": "#6f00be",
+            "on-tertiary-fixed-variant": "#790018",
+            "surface-container": "#11192e",
+            "tertiary-fixed": "#ff9192",
+            "on-error-container": "#ffa8a3",
+            "on-error": "#490006",
+            "inverse-primary": "#00639e",
+            "primary-fixed-dim": "#0099f0",
+            "on-primary-container": "#00253f",
+            "background": "#070d1f",
+            "on-secondary-fixed-variant": "#7511c3",
+            "secondary-fixed-dim": "#dbb4ff",
+            "primary-container": "#2aa7ff",
+            "primary": "#5eb4ff",
+            "on-primary": "#003151",
+            "on-surface-variant": "#a5aac2",
+            "tertiary": "#ff7074",
+            "tertiary-fixed-dim": "#ff7a7c",
+            "surface-bright": "#222b47",
+            "on-surface": "#dfe4fe",
+            "on-tertiary": "#49000a",
+            "on-secondary-fixed": "#4f0089",
+            "secondary": "#c180ff",
+            "on-primary-fixed": "#000000",
+            "error": "#ff716c",
+            "on-tertiary-container": "#000000",
+            "on-secondary-container": "#e9cdff",
+            "inverse-surface": "#faf8ff",
+            "inverse-on-surface": "#4f5469",
+            "surface-container-lowest": "#000000",
+            "surface-tint": "#5eb4ff",
+            "surface-container-highest": "#1c253e",
+            "tertiary-container": "#fc003c",
+            "surface-dim": "#070d1f",
+            "secondary-fixed": "#e5c6ff",
+            "tertiary-dim": "#e90037",
+            "primary-fixed": "#2aa7ff",
+            "secondary-dim": "#9c48ea",
+            "surface-container-low": "#0c1326",
+            "error-dim": "#d7383b",
+            "on-tertiary-fixed": "#3a0006",
+            "surface-container-high": "#171f36",
+            "outline-variant": "#41475b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "display": ["Space Grotesk"],
+            "body": ["Manrope"],
+            "label": ["Manrope"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #070d1f;
+      color: #dfe4fe;
+      font-family: 'Manrope', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-card {
+      background: rgba(28, 37, 62, 0.6);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(65, 71, 91, 0.2), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .neon-blue-glow:hover {
+      box-shadow: 0 0 15px rgba(94, 180, 255, 0.3);
+    }
+    .neon-purple-glow:hover {
+      box-shadow: 0 0 15px rgba(193, 128, 255, 0.3);
+    }
+    .neon-red-glow:hover {
+      box-shadow: 0 0 15px rgba(255, 112, 116, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-50 bg-[#0a1128] shadow-[4px_0_24px_rgba(0,0,0,0.5)] flex flex-col h-full py-8 px-4 font-['Manrope'] font-medium uppercase tracking-widest text-[11px]">
+<div class="mb-12 px-4">
+<div class="font-['Space_Grotesk'] text-2xl font-black text-[#5eb4ff] tracking-tight">RISCEND</div>
+<div class="text-[10px] text-on-surface-variant tracking-[0.2em] mt-1 opacity-60">v1.0.4 Sovereign</div>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Active: Terminal (Dashboard) -->
+<a class="group flex items-center gap-3 px-4 py-3 text-[#5eb4ff] bg-[#5eb4ff]/5 border-r-2 border-[#5eb4ff] shadow-[inset_-10px_0_20px_rgba(94,180,255,0.05)] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+<span class="group-hover:translate-x-1 transition-transform duration-200">Terminal</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#a5aac2] hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+<span class="group-hover:translate-x-1 transition-transform duration-200">Projects</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#a5aac2] hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">auto_graph</span>
+<span class="group-hover:translate-x-1 transition-transform duration-200">Foundry</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#a5aac2] hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span class="group-hover:translate-x-1 transition-transform duration-200">Command</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 text-[#a5aac2] hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+<span class="group-hover:translate-x-1 transition-transform duration-200">Vault</span>
+</a>
+</nav>
+<div class="mt-auto space-y-6">
+<button class="w-full bg-[#5eb4ff]/10 border border-[#5eb4ff]/30 text-[#5eb4ff] py-3 text-[10px] font-bold tracking-[0.2em] hover:bg-[#5eb4ff]/20 transition-all active:scale-95">
+        Deploy Contract
+      </button>
+<div class="space-y-1">
+<a class="group flex items-center gap-3 px-4 py-2 text-[#a5aac2] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="text-[10px]">Docs</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-2 text-[#a5aac2] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+<span class="text-[10px]">Support</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-20 z-40 bg-[#070d1f]/80 backdrop-blur-xl flex items-center justify-between px-8 w-full shadow-2xl shadow-black/50 border-b border-white/5">
+<div class="flex items-center gap-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#a5aac2] text-lg">search</span>
+<input class="bg-surface-variant/40 border-none rounded-none text-[11px] tracking-widest px-10 py-2 w-64 focus:ring-1 focus:ring-[#5eb4ff]/50 text-on-surface placeholder:text-[#a5aac2]/40 font-['Manrope']" placeholder="QUERY PROTOCOL..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#a5aac2] hover:text-[#5eb4ff] transition-all duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-[#a5aac2] hover:text-[#5eb4ff] transition-all duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="text-[#a5aac2] hover:text-[#5eb4ff] transition-all duration-300 scale-95 active:scale-90">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-[#5eb4ff]/30">
+<img alt="Sovereign identity avatar" data-alt="Cyberpunk style digital avatar portrait with neon blue highlights and sleek metallic visor on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1egLmzdxBdgZ8MTc0Iv6Nzpjc_zTbrqcWj5LutyUqaefg0Bf_ApqVvs_QeypzZj9n77fm1bLtefAdIfjWhzuEQjcNhLL5wJVDELN9kGF_mJuEVjDAZiqEEudqWoRQ4COIUwfndIY5Wfh--Sl-9Pd1PkoZPO1J5DgA0PQ_Gz4f1dQN_K15DzISvpLO_UXTzwUkPNUv_vLQRzgTpSTkS4FaT3n4_OZ1C9KKCzHzqrGuJBZWa2CUZMT5cInuXY4i_0Ra2Qc2BaSIP0Dz"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 p-8 min-h-screen">
+<div class="max-w-[1600px] mx-auto space-y-8">
+<!-- Top Row: Admin & Founder Split -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Founder Dashboard (Purple) -->
+<section class="xl:col-span-2 glass-card bg-surface-container-low rounded-xl p-8 border-l-4 border-secondary overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<div>
+<p class="font-label text-[10px] tracking-[0.2em] text-secondary/70 uppercase mb-1">Portfolio: Sovereign Visionary</p>
+<h2 class="font-display text-3xl font-bold text-white tracking-tight uppercase">Founder Dashboard</h2>
+</div>
+<button class="px-6 py-3 bg-secondary text-on-secondary font-bold text-xs tracking-widest uppercase rounded hover:bg-secondary/80 transition-all neon-purple-glow">
+              Launch Venture
+            </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest p-6 rounded-lg relative group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<p class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase mb-4">Total Capital Raised</p>
+<div class="flex items-baseline gap-2">
+<span class="font-display text-4xl font-bold text-white tracking-tighter">$14.2M</span>
+<span class="text-secondary font-bold text-xs">+12.4%</span>
+</div>
+<div class="mt-4 h-1 w-full bg-surface-variant overflow-hidden">
+<div class="h-full bg-secondary w-3/4 shadow-[0_0_8px_rgba(193,128,255,0.6)]"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg relative group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<p class="font-label text-[10px] tracking-widest text-on-surface-variant uppercase mb-4">Active Ventures</p>
+<div class="flex items-baseline gap-4">
+<span class="font-display text-4xl font-bold text-white tracking-tighter">04</span>
+<div class="flex gap-1">
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+</div>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-4 font-label uppercase tracking-widest">Protocol Compliance: 100%</p>
+</div>
+</div>
+</section>
+<!-- Admin Control Panel (Red) -->
+<section class="glass-card bg-surface-container-low rounded-xl p-8 border-l-4 border-tertiary">
+<p class="font-label text-[10px] tracking-[0.2em] text-tertiary/70 uppercase mb-1">Authority: Protocol Enforcer</p>
+<h2 class="font-display text-3xl font-bold text-white tracking-tight uppercase mb-8">Admin Console</h2>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-4 bg-tertiary/5 border border-tertiary/10">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Global TVL</p>
+<p class="font-display text-2xl font-bold text-white">$1.24B</p>
+</div>
+<span class="material-symbols-outlined text-tertiary">security</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-tertiary/5 border border-tertiary/10">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">Active Proposals</p>
+<p class="font-display text-2xl font-bold text-white">24</p>
+</div>
+<span class="material-symbols-outlined text-tertiary">gavel</span>
+</div>
+<button class="w-full py-4 bg-tertiary-container/20 border border-tertiary/30 text-tertiary font-bold text-xs tracking-widest uppercase hover:bg-tertiary-container/30 transition-all neon-red-glow">
+              Execute Emergency Lock
+            </button>
+</div>
+</section>
+</div>
+<!-- Active Projects Feed (Blue) -->
+<section>
+<div class="flex items-baseline justify-between mb-8 border-b border-white/5 pb-4">
+<div class="flex items-center gap-4">
+<h2 class="font-display text-3xl font-bold text-white tracking-tight uppercase">Active Projects</h2>
+<div class="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[10px] font-bold tracking-widest">LIVE_FEED</div>
+</div>
+<a class="text-[10px] font-bold text-on-surface-variant hover:text-primary tracking-[0.2em] uppercase transition-colors" href="#">View All Archive</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-8">
+<!-- Project Card 1 -->
+<div class="glass-card bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Abstract cinematic 3D render of glowing blue circuit paths forming a neural network grid in a dark void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRNVvSxPiEGUu0mTqacAkHT-8KDCN0XKAS8rtDlzkNPy7n6QTN37QFg0egRau3Nz9n9I8P-P_whyESMakapyWW_iEJN2gG4aP_z2d9v4_zT6YmGUzluRdW27ImTjnJaCwzvm34CbjdmLGXSgu740Hv7dFVGwO8PXq17vUICoDLlHCg3Mz3vzlnYOXpdIOCYo1LtM_2TcDy26fqK3yWISw-0YztcYqf5_xvWEKg1MmCE8ENQ1POs8aMKG3g4Xe9tQ64_f_2aEsZg6TU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-highest/80 backdrop-blur text-primary text-[9px] font-bold tracking-widest uppercase rounded">Tier 1</span>
+<span class="px-2 py-1 bg-surface-container-highest/80 backdrop-blur text-secondary text-[9px] font-bold tracking-widest uppercase rounded">Founder Verified</span>
+</div>
+</div>
+<div class="p-8">
+<div class="mb-6">
+<h3 class="font-display text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-primary transition-colors">Aether Node Network</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2 font-body">Decentralized mesh architecture for sovereign data routing in high-latency orbital environments.</p>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-end">
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Progress (84%)</p>
+<p class="font-display text-lg font-bold text-white">$2.4M / $3.0M</p>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary shadow-[0_0_12px_rgba(94,180,255,0.8)] w-[84%] transition-all"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 py-3 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold text-xs tracking-widest uppercase rounded hover:shadow-[0_0_15px_rgba(94,180,255,0.4)] transition-all active:scale-95 neon-blue-glow">
+                  Back Project
+                </button>
+<button class="p-3 border border-outline-variant hover:bg-white/5 transition-colors text-on-surface">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="glass-card bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Macro photography of glowing violet organic DNA strands encased in a hexagonal glass structure with floating digital particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtaSTxvvT3Fa6_rxvXFEWHeD6_c9-_PFIumjwhPNJeaZkc6mSm9EjMbU4hdJVltur2nSWh0qdH5IblQBtq5nLC8wbNFU8QGC3SmaqynOYSlHYzE-D7g11fsiAE5O1mhgRTGUu9CcemMyskDG0bzEoRQUhSRH5vnqJv7ihgV754yAWy38OvjElYvYf0XQdwe1jZtto9tktzgufBAR4t6hrv9Jp1oyL5yXj8Ywyg-7mprlDn7F2eA1Xg-WFPu5nQVxFhpA--iojGTyFq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-highest/80 backdrop-blur text-primary text-[9px] font-bold tracking-widest uppercase rounded">Tier 2</span>
+</div>
+</div>
+<div class="p-8">
+<div class="mb-6">
+<h3 class="font-display text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-primary transition-colors">Bio-Crypt Engine</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2 font-body">Synthetic DNA sequence encryption for long-term immutable biological data storage vaults.</p>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-end">
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Progress (42%)</p>
+<p class="font-display text-lg font-bold text-white">$840K / $2.0M</p>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary shadow-[0_0_12px_rgba(94,180,255,0.8)] w-[42%] transition-all"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 py-3 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold text-xs tracking-widest uppercase rounded hover:shadow-[0_0_15px_rgba(94,180,255,0.4)] transition-all active:scale-95 neon-blue-glow">
+                  Back Project
+                </button>
+<button class="p-3 border border-outline-variant hover:bg-white/5 transition-colors text-on-surface">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="glass-card bg-surface-container-low rounded-xl overflow-hidden group">
+<div class="h-48 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="High-contrast monochromatic scene of a floating monolithic obsidian structure with sharp geometric shadows and slivers of neon blue light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_7zHU__AMQ8IwCWRZywK5oRxruNXyUZdswRtIr_KMhWm_czLZsWtkEnpxw3lhBJB7aqOpHw3aD3Zcogvp-PBiK93ZCg5F2pSuPdDwhVMwey5FD85D_7nh2rwC680sNFk9JedmfjEYwOg6lYPMvTGDoEW-f29R_Qbmp3bzUxTmupzxh0ZhcDsQXRwMgWCc65OyWgS8lu3fbo2zYCA9V48Ng0CKlK4R1-4YCMRB4LgJsMYWNfVEEbBFFrpgv4uEsDla62bsuSgmPfBJ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-highest/80 backdrop-blur text-tertiary text-[9px] font-bold tracking-widest uppercase rounded">Admin Favored</span>
+</div>
+</div>
+<div class="p-8">
+<div class="mb-6">
+<h3 class="font-display text-2xl font-bold text-white tracking-tight mb-2 group-hover:text-primary transition-colors">Void Relayer</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2 font-body">Deep-space signal relay protocol utilizing quantum entanglement for instantaneous consensus.</p>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-end">
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Progress (65%)</p>
+<p class="font-display text-lg font-bold text-white">$3.9M / $6.0M</p>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary shadow-[0_0_12px_rgba(94,180,255,0.8)] w-[65%] transition-all"></div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 py-3 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-bold text-xs tracking-widest uppercase rounded hover:shadow-[0_0_15px_rgba(94,180,255,0.4)] transition-all active:scale-95 neon-blue-glow">
+                  Back Project
+                </button>
+<button class="p-3 border border-outline-variant hover:bg-white/5 transition-colors text-on-surface">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Status Row -->
+<footer class="grid grid-cols-1 md:grid-cols-4 gap-4 pb-12">
+<div class="bg-surface-container p-4 flex flex-col justify-center">
+<p class="font-label text-[9px] tracking-[0.2em] text-on-surface-variant uppercase mb-1">Network Status</p>
+<div class="flex items-center gap-2">
+<div class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></div>
+<span class="text-xs font-bold text-white tracking-widest uppercase">Operational</span>
+</div>
+</div>
+<div class="bg-surface-container p-4 flex flex-col justify-center">
+<p class="font-label text-[9px] tracking-[0.2em] text-on-surface-variant uppercase mb-1">Latency</p>
+<span class="text-xs font-bold text-white tracking-widest uppercase">14.2ms</span>
+</div>
+<div class="bg-surface-container p-4 flex flex-col justify-center">
+<p class="font-label text-[9px] tracking-[0.2em] text-on-surface-variant uppercase mb-1">Nodes</p>
+<span class="text-xs font-bold text-white tracking-widest uppercase">4,281 Distributed</span>
+</div>
+<div class="bg-surface-container p-4 flex flex-col justify-center">
+<p class="font-label text-[9px] tracking-[0.2em] text-on-surface-variant uppercase mb-1">Last Block</p>
+<span class="text-xs font-bold text-white tracking-widest uppercase">#18,241,093</span>
+</div>
+</footer>
+</div>
+</main>
+</body></html>
