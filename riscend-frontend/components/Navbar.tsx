@@ -6,7 +6,6 @@ import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 
 export default function Navbar() {
     const { account } = useWallet();
-    // NEW: State to control the mobile menu
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const adminAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "0x72a9c1bce2b923a81abc72404b5f4e523997445615ef584b47bb57eeebc46a5f";
@@ -15,8 +14,9 @@ export default function Navbar() {
     return (
         <nav className="w-full border-b border-slate-800/50 sticky top-0 bg-slate-950/90 backdrop-blur-xl z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
-                <Link href="/" className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 italic tracking-tighter">
-                    Riscend.
+                {/* BRANDING RESTORED TO FULL NAME */}
+                <Link href="/" className="text-lg sm:text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 italic tracking-tighter whitespace-nowrap">
+                    Riscend Alliance Protocol.
                 </Link>
 
                 {/* DESKTOP MENU (Hidden on Mobile) */}
@@ -46,16 +46,15 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                {/* MOBILE HAMBURGER BUTTON (Hidden on Desktop) */}
-                <div className="md:hidden flex items-center gap-4">
-                    <div className="riscend-wallet-adapter scale-90">
+                {/* MOBILE BUTTONS (Hidden on Desktop) */}
+                <div className="md:hidden flex items-center gap-2">
+                    <div className="riscend-wallet-adapter scale-75 origin-right">
                         <WalletSelector />
                     </div>
                     <button 
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-                        className="text-slate-400 hover:text-white p-2"
+                        className="text-slate-400 hover:text-white p-1"
                     >
-                        {/* Simple SVG icon that changes between Hamburger and 'X' */}
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"} />
                         </svg>
